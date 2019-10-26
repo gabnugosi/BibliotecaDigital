@@ -1,29 +1,59 @@
 package com.intechservices.bibliotecadigital.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "obra")
 public class Obra {
-	private int id;
+
+	@Id
+	@GeneratedValue
+	@Column(name = "id_obra")
+	private int idObra;
+
+	@Column(name = "id_autor")
+	private int idAutor;
+
+	@Column(name = "id_editora")
+	private int idEditora;
+
+	@Column(name = "nm_obra")
 	private String nome;
+
+	@Column(name = "descricao_obra")
+	private String descricao;
+
+	@Column(name = "edicao_obra")
 	private int edicao;
+
+	@Column(name = "tombo")
 	private String tombo;
+
+	@Column(name = "ano_publi")
 	private String ano;
 
-	public Obra() {}
-	
-	public Obra(int id, String nome, int edicao, String tombo, String ano) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.edicao = edicao;
-		this.tombo = tombo;
-		this.ano = ano;
+	@Column(name = "status_obra")
+	private String status;
+
+	@Column(name = "categoria")
+	private String categoria;
+
+	@Column(name = "qtd_obra")
+	private int qtde;
+
+	public Obra() {
 	}
 
-	public int getId() {
-		return id;
+	public int getIdObra() {
+		return idObra;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdObra(int id) {
+		this.idObra = id;
 	}
 
 	public String getNome() {
@@ -57,7 +87,53 @@ public class Obra {
 	public void setAno(String ano) {
 		this.ano = ano;
 	}
-	
 
+	public int getIdAutor() {
+		return idAutor;
+	}
+
+	public void setIdAutor(int idAutor) {
+		this.idAutor = idAutor;
+	}
+
+	public int getIdEditora() {
+		return idEditora;
+	}
+
+	public void setIdEditora(int idEditora) {
+		this.idEditora = idEditora;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public int getQtde() {
+		return qtde;
+	}
+
+	public void setQtde(int qtde) {
+		this.qtde = qtde;
+	}
 
 }
