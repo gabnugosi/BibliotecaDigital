@@ -1,5 +1,7 @@
 package com.intechservices.bibliotecadigital.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,21 +9,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pendencia")
-public class Pendencia {
+@Table(name = "usuario_inadimplente")
+public class UsuarioInadimplente {
+	
 	@Id
 	@GeneratedValue
-	@Column(name = "id_usuario_pendencia")
+	@Column(name = "idusuario_inadimplente")
 	private int id;
 	
 	@Column(name = "id_usu")
 	private int idUser;
+	
 	@Column(name = "valor_multa")
 	private double valorMulta;
 	
-	@Column(name = "pendente_bool")
-	private boolean pendente;
+	@Column(name = "devendo_bool")
+	private boolean divida;
 	
+	@Column(name = "multa_paga_data")
+	private Date dataPgtoMulta;
 	
 	public int getId() {
 		return id;
@@ -41,12 +47,19 @@ public class Pendencia {
 	public void setValorMulta(double valorMulta) {
 		this.valorMulta = valorMulta;
 	}
-	public boolean isPendente() {
-		return pendente;
+	public boolean isDivida() {
+		return divida;
 	}
-	public void setPendente(boolean pendente) {
-		this.pendente = pendente;
+	public void setDivida(boolean divida) {
+		this.divida = divida;
 	}
+	public Date getDataPgtoMulta() {
+		return dataPgtoMulta;
+	}
+	public void setDataPgtoMulta(Date dataPgtoMulta) {
+		this.dataPgtoMulta = dataPgtoMulta;
+	}
+	
 	
 	
 }
