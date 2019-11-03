@@ -31,7 +31,7 @@ public class Usuario {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_endereco")
-	private int idEndereco;
+	private Endereco idEndereco;
 		
 	public int getIdUser() {
 		return idUser;
@@ -63,10 +63,10 @@ public class Usuario {
 	public void setRg(int rg) {
 		this.rg = rg;
 	}
-	public int getIdEndereco() {
+	public Endereco getIdEndereco() {
 		return idEndereco;
 	}
-	public void setIdEndereco(int idEndereco) {
+	public void setIdEndereco(Endereco idEndereco) {
 		this.idEndereco = idEndereco;
 	}
 	
