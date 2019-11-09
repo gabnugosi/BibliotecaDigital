@@ -13,32 +13,44 @@ public class ImagemObra {
 	@GeneratedValue
 	@Column(name = "id_img_obra")
 	private int id;
-	
+
 	@Column(name = "urlimg")
 	private String urlimg;
-	
+
 	@Column(name = "id_obra")
 	private int idObra;
+
+	public ImagemObra() {}
 	
-	
+	public ImagemObra(int id, String urlimg, int idObra) {
+		super();
+		this.id = id;
+		this.urlimg = urlimg;
+		this.idObra = idObra;
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getUrlimg() {
 		return urlimg;
 	}
+
 	public void setUrlimg(String urlimg) {
 		this.urlimg = urlimg;
 	}
+
 	public int getIdObra() {
 		return idObra;
 	}
+
 	public void setIdObra(int idObra) {
 		this.idObra = idObra;
 	}
-	
-	
+
 }

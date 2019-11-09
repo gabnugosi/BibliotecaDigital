@@ -21,40 +21,40 @@ import br.com.intechservices.bibliotecadigital.model.Editora;
 public class EditoraController {
 	@Autowired
 	private EditoraDAO dao;
-	
-@PostMapping
-public void insert (@RequestBody Editora edi) {
-	dao.save(edi);
-}
-@GetMapping 
-public List<Editora>findAll(){
-return dao.findAll();
-}
-@GetMapping(path= {"/{id}"})
-public ResponseEntity<Editora> findById(@PathVariable Integer id){
-		return dao.findById(id)
-		.map(record -> ResponseEntity.ok().body(record))
-		.orElse(ResponseEntity.notFound().build());
-		
-}
-@PutMapping(value="/{id}")
-public ResponseEntity<Editora> update (@PathVariable("id") Integer id,
-										@RequestBody Editora edi){
-	return dao.findById(id)
-				.map(record ->{
-				record.setNome(edi.getNome());
-				Editora updated = dao.save(record);
-				return ResponseEntity.ok().body(updated);
-				}).orElse(ResponseEntity.notFound().build());				
 
-}
-@DeleteMapping(path = {"/id"})
-public ResponseEntity<?> delete(@PathVariable("id") Integer id){
-	return dao.findById(id)
-			.map(record -> {
-				dao.deleteById(id);
-				return ResponseEntity.ok().build();
-			}).orElse(ResponseEntity.notFound().build());
-	
-}
+	@PostMapping
+	public void insert(@RequestBody Editora edi) {
+		dao.save(edi);
+	}
+
+	@GetMapping
+	public List<Editora> findAll() {
+		return dao.findAll();
+	}
+
+	@GetMapping(path = { "/{id}" })
+	public ResponseEntity<Editora> findById(@PathVariable Integer id) {
+		return dao.findById(id).map(record -> ResponseEntity.ok().body(record))
+				.orElse(ResponseEntity.notFound().build());
+
+	}
+
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Editora> update(@PathVariable("id") Integer id, @RequestBody Editora edi) {
+		return dao.findById(id).map(record -> {
+			record.setNome(edi.getNome());
+			Editora updated = dao.save(record);
+			return ResponseEntity.ok().body(updated);
+		}).orElse(ResponseEntity.notFound().build());
+
+	}
+
+	@DeleteMapping(path = { "/id" })
+	public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+		return dao.findById(id).map(record -> {
+			dao.deleteById(id);
+			return ResponseEntity.ok().build();
+		}).orElse(ResponseEntity.notFound().build());
+
+	}
 }
