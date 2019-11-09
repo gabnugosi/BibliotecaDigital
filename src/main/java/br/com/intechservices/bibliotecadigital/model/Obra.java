@@ -1,26 +1,42 @@
 package br.com.intechservices.bibliotecadigital.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "obra")
+@SecondaryTable(name = "autor", pkJoinColumns = 
+{ @PrimaryKeyJoinColumn(name = "id_autor") })
+@SecondaryTable(name = "editora", pkJoinColumns = 
+{ @PrimaryKeyJoinColumn(name = "id_editora") })
 public class Obra {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id_obra")
 	private int idObra;
+/*
+	@ManyToMany
+	@JoinTable(name = "nm_autor", joinColumns = { @JoinColumn(name = "id_autor") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_autor") })
+	private Set<Autor> autor;
 
-	@Column(name = "id_autor")
-	private int idAutor;
-
-	@Column(name = "id_editora")
-	private int idEditora;
-
+	@ManyToOne
+	@JoinTable(name = "nm_editora", joinColumns = { @JoinColumn(name = "id_editora") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_editora") })
+	private Set<Editora> editora;
+*/
 	@Column(name = "nm_obra")
 	private String nome;
 
@@ -47,7 +63,23 @@ public class Obra {
 
 	public Obra() {
 	}
-
+/*
+	public Obra(int idObra, Set<Autor> autor, Set<Editora> editora, String nome, String descricao, int edicao,
+			String tombo, String ano, String status, String categoria, int qtde) {
+		super();
+		this.idObra = idObra;
+		this.autor = autor;
+		this.editora = editora;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.edicao = edicao;
+		this.tombo = tombo;
+		this.ano = ano;
+		this.status = status;
+		this.categoria = categoria;
+		this.qtde = qtde;
+	}
+*/
 	public int getIdObra() {
 		return idObra;
 	}
@@ -87,22 +119,22 @@ public class Obra {
 	public void setAno(String ano) {
 		this.ano = ano;
 	}
-
-	public int getIdAutor() {
-		return idAutor;
+/*
+	public Set<Autor> getAutor() {
+		return autor;
 	}
 
-	public void setIdAutor(int idAutor) {
-		this.idAutor = idAutor;
+	public void setAutor(Set<Autor> autor) {
+		this.autor = autor;
 	}
 
-	public int getIdEditora() {
-		return idEditora;
+	public Set<Editora> getEditora() {
+		return editora;
 	}
 
-	public void setIdEditora(int idEditora) {
-		this.idEditora = idEditora;
-	}
+	public void setEditora(Set<Editora> editora) {
+		this.editora = editora;
+	}*/
 
 	public String getDescricao() {
 		return descricao;
