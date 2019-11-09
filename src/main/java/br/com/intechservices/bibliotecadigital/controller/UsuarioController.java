@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.intechservices.bibliotecadigital.model.Usuario;
-import br.com.intechservices.bibliotecadigital.repository.UsuarioRepository;
+//import br.com.intechservices.bibliotecadigital.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("usuarios")
 public class UsuarioController {
+	/*
 	@Autowired
 	private UsuarioRepository usuarioRepo;
 	
@@ -72,5 +73,5 @@ public class UsuarioController {
 	        else
 	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }
-	 
+	 */
 }

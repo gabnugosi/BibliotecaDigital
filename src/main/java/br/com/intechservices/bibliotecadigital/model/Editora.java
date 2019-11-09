@@ -18,7 +18,14 @@ public class Editora {
 	@Column(name = "nm_editora")
 	private String nome;
 	
-	
+	public Editora() {
+		super();
+	}
+	public Editora(int id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	}
 	public int getId() {
 		return id;
 	}

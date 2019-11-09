@@ -10,6 +10,10 @@ import javax.persistence.Table;
 @Table(name = "autor")
 public class Autor {
 	
+	
+	
+	public Autor() {}
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id_autor")
