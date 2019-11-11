@@ -1,9 +1,13 @@
 package br.com.intechservices.bibliotecadigital.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +25,10 @@ public class Autor {
 		
 	@Column(name = "nm_autor")
 	private String nome;
-
+	
+	@ManyToMany(mappedBy="autor")  
+	private Set<Obra> obra;
+	
 	public Autor(int id, String nome) {
 		super();
 		this.id = id;

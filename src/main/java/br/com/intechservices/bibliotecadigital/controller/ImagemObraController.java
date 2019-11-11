@@ -37,6 +37,7 @@ public class ImagemObraController {
 				.map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
+	//incluir a relação com a tabela
 	@PutMapping(value="/{id}")
 	public ResponseEntity<ImagemObra> update(@PathVariable("id") Integer id, @RequestBody ImagemObra imgObra){
 		return dao.findById(id)
@@ -56,4 +57,4 @@ public class ImagemObraController {
 				}).orElse(ResponseEntity.notFound().build());
 				}
 }
-}
+

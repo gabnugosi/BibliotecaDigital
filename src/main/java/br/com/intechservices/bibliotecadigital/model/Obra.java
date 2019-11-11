@@ -1,5 +1,8 @@
 package br.com.intechservices.bibliotecadigital.model;
 
+
+
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -16,22 +19,24 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "obra")
-@SecondaryTable(name = "autor", pkJoinColumns = 
-{ @PrimaryKeyJoinColumn(name = "id_autor") })
-@SecondaryTable(name = "editora", pkJoinColumns = 
-{ @PrimaryKeyJoinColumn(name = "id_editora") })
+/*@SecondaryTable(name = "autor", pkJoinColumns = 
+{ @PrimaryKeyJoinColumn(name = "id_autor") })*/
+/*@SecondaryTable(name = "editora", pkJoinColumns = 
+{ @PrimaryKeyJoinColumn(name = "id_editora") })*/
 public class Obra {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id_obra")
 	private int idObra;
-/*
-	@ManyToMany
-	@JoinTable(name = "nm_autor", joinColumns = { @JoinColumn(name = "id_autor") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_autor") })
-	private Set<Autor> autor;
 
+	@ManyToMany
+	//@JoinColumn(name = "id_autor", referencedColumnName="id_autor",nullable=false) 
+	@JoinTable(name = "autor", 
+			joinColumns = { @JoinColumn(name = "obra.id_autor") }, 
+			inverseJoinColumns = {@JoinColumn(name = "autor.id_autor") })
+	private Set<Autor> autor;
+/*
 	@ManyToOne
 	@JoinTable(name = "nm_editora", joinColumns = { @JoinColumn(name = "id_editora") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_editora") })
