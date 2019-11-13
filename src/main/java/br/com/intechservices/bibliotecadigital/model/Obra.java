@@ -1,9 +1,8 @@
 package br.com.intechservices.bibliotecadigital.model;
 
 
+import java.util.List;
 
-import java.util.Collection;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
@@ -32,10 +28,10 @@ public class Obra {
 
 	@ManyToMany
 	//@JoinColumn(name = "id_autor", referencedColumnName="id_autor",nullable=false) 
-	@JoinTable(name = "autor", 
+	@JoinTable(name = "obra", 
 			joinColumns = { @JoinColumn(name = "obra.id_autor") }, 
 			inverseJoinColumns = {@JoinColumn(name = "autor.id_autor") })
-	private Set<Autor> autor;
+	private List<Autor> autores;
 /*
 	@ManyToOne
 	@JoinTable(name = "nm_editora", joinColumns = { @JoinColumn(name = "id_editora") }, inverseJoinColumns = {

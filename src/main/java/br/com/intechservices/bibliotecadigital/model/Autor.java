@@ -1,12 +1,14 @@
 package br.com.intechservices.bibliotecadigital.model;
 
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -26,8 +28,11 @@ public class Autor {
 	@Column(name = "nm_autor")
 	private String nome;
 	
-	@ManyToMany(mappedBy="autor")  
-	private Set<Obra> obra;
+	@ManyToMany
+	@JoinTable(name = "obra", 
+	joinColumns = { @JoinColumn(name = "autor.id_autor") }, 
+	inverseJoinColumns = {@JoinColumn(name = "obra.id_autor") })
+	private List<Obra> obras;
 	
 	public Autor(int id, String nome) {
 		super();
