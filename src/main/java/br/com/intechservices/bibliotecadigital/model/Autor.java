@@ -29,9 +29,6 @@ public class Autor {
 	private String nome;
 	
 	@ManyToMany(mappedBy = "autores")
-	/*@JoinTable(name = "obra", 
-	joinColumns = { @JoinColumn(name = "id_autor", referencedColumnName="id_autor") }, 
-	inverseJoinColumns = {@JoinColumn(name = "id_autor", referencedColumnName="id_autor") })*/
 	private List<Obra> obras;
 	
 	public Autor(int id, String nome) {

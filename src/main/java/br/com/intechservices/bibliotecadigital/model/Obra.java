@@ -1,16 +1,17 @@
 package br.com.intechservices.bibliotecadigital.model;
 
-
 import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,24 +22,18 @@ public class Obra {
 	@GeneratedValue
 	@Column(name = "id_obra")
 	private int idObra;
-/*
-	@Column(name="obra.id_autor")
-	private int idAutor;
-	*/
-	@Column(name="id_editora")
-	private int idEditora;	
-	
-	@ManyToMany	
-	@JoinTable(name = "obra_autor", 
-			joinColumns = { @JoinColumn(name = "id_obra") }, 
-			inverseJoinColumns = {@JoinColumn(name = "id_autor") })
+
+	@Column(name = "id_editora")
+	private int idEditora;
+
+	@ManyToMany
+	@JoinTable(name = "obra_autor", joinColumns = { @JoinColumn(name = "id_obra") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_autor") })
 	private List<Autor> autores;
-/*
-	@ManyToOne
-	@JoinTable(name = "nm_editora", joinColumns = { @JoinColumn(name = "id_editora") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_editora") })
-	private Set<Editora> editora;
-*/
+
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name = "id_editora", nullable=false, insertable=false, updatable=false)
+	private Editora obra;
 
 	@Column(name = "nm_obra")
 	private String nome;
@@ -110,23 +105,19 @@ public class Obra {
 	public List<Autor> getAutores() {
 		return autores;
 	}
+
 	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
 	}
-	/*
-	public int getIdAutor() {
-		return idAutor;
-	}
-	public void setIdAutor(int idAutor) {
-		this.idAutor = idAutor;
-	}*/
+
 	public int getIdEditora() {
 		return idEditora;
 	}
+
 	public void setIdEditora(int idEditora) {
 		this.idEditora = idEditora;
 	}
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
