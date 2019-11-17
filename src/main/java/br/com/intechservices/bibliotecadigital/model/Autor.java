@@ -22,16 +22,16 @@ public class Autor {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id_autor")
+	@Column(name = "id")
 	private int id;
 		
 	@Column(name = "nm_autor")
 	private String nome;
 	
-	@ManyToMany
-	@JoinTable(name = "obra", 
-	joinColumns = { @JoinColumn(name = "autor.id_autor") }, 
-	inverseJoinColumns = {@JoinColumn(name = "obra.id_autor") })
+	@ManyToMany(mappedBy = "autores")
+	/*@JoinTable(name = "obra", 
+	joinColumns = { @JoinColumn(name = "id_autor", referencedColumnName="id_autor") }, 
+	inverseJoinColumns = {@JoinColumn(name = "id_autor", referencedColumnName="id_autor") })*/
 	private List<Obra> obras;
 	
 	public Autor(int id, String nome) {

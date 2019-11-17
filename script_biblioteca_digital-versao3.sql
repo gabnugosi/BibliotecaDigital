@@ -196,67 +196,52 @@ alter column status_obra varchar(12) null;
 alter table obra 
 drop column qtd_pagina, genero, idioma;
 
-alter table autor
-alter column sobrnm_autor	VARCHAR(15) NULL;
-
-alter table autor
-alter column nacionalidade	VARCHAR(15) NULL;
-
 ALTER TABLE reserva
 ADD CONSTRAINT id_obra_reserva FOREIGN KEY (id_obra) REFERENCES obra(id_obra);
 
-sp_help autor
 
 alter table autor
-drop column sobrnm_autor	;
+drop column sobrnm_autor;
 
 alter table autor
-drop column nacionalidade	;
+drop column nacionalidade;
 
-sp_help obra
-
-
-sp_help usuario
-
-sp_help endereco
 alter table endereco
 alter column cep  int not null;
 
-sp_help editora
-
-sp_help usuario_senha
-
-sp_help moderador
-
-sp_help imagem_obra
 alter table imagem_obra
-drop column nm_arquivo  ;
+drop column nm_arquivo ;
 
 alter table imagem_obra
-add urlimg varchar(1000) not null  ;
+add urlimg varchar(1000) not null ;
 
 alter table imagem_obra
-drop column vb_imagem ;
+drop column vb_imagem;
 
 alter table imagem_obra
 add id_obra int;
 
 --incluir constraint
-
-sp_help pendencia
-
 alter table pendencia
 alter column valor_multa float not null;
 
-sp_help pendencia;
-sp_help usuario_inadimplente;
 alter table usuario_inadimplente
 alter column valor_multa float not null;
 
 alter table autor
 alter column nm_autor varchar(60);
 
+CREATE TABLE obra_autor(
+	id int primary key,  
+	id_autor int not null, 
+	id_obra int not null,
+	constraint id_obra_obraautor FOREIGN KEY (id_obra) REFERENCES obra (id_obra),
+	constraint  id_autor_obraautor FOREIGN KEY (id_autor) REFERENCES autor (id_autor)
+	);
 
+alter table obra
+DROP CONSTRAINT id_autor_autor;
 
-
+alter table obra
+drop column id_autor;
 
