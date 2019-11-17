@@ -21,16 +21,16 @@ public class Obra {
 	@GeneratedValue
 	@Column(name = "id_obra")
 	private int idObra;
-
+/*
 	@Column(name="obra.id_autor")
 	private int idAutor;
-	
+	*/
 	@Column(name="id_editora")
 	private int idEditora;	
 	
 	@ManyToMany	
-	@JoinTable(name = "autor", 
-			joinColumns = { @JoinColumn(name = "id") }, 
+	@JoinTable(name = "obra_autor", 
+			joinColumns = { @JoinColumn(name = "id_obra") }, 
 			inverseJoinColumns = {@JoinColumn(name = "id_autor") })
 	private List<Autor> autores;
 /*
@@ -113,12 +113,13 @@ public class Obra {
 	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
 	}
+	/*
 	public int getIdAutor() {
 		return idAutor;
 	}
 	public void setIdAutor(int idAutor) {
 		this.idAutor = idAutor;
-	}
+	}*/
 	public int getIdEditora() {
 		return idEditora;
 	}

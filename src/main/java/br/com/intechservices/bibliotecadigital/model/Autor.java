@@ -22,7 +22,7 @@ public class Autor {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "id_autor")
 	private int id;
 		
 	@Column(name = "nm_autor")
