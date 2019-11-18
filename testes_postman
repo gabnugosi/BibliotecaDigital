@@ -1,0 +1,23 @@
+#Endereco
+
+{
+	"cep" : "02257070",
+	"logradouro":"Rua",
+	"nomeLogradouro": "Doutor Guilherme Telles",
+	"numeroLogradouro": "183",
+	"cidade":"São Paulo",
+	"bairro":"Jaçanã",
+	"estado":"SP"
+}
+
+#Obra
+{
+	"nome" : "Capitães da Areia",
+	"idEditora" : "1",
+	"descricao" : "Desde o seu lançamento, em 1937, Capitães da Areia causou escândalo: inúmeros exemplares do livro foram queimados em praça pública, por determinação do Estado Novo. Ao longo de sete décadas a narrativa não perdeu viço nem atualidade, pelo contrário: a vida urbana dos meninos pobres e infratores ganhou contornos trágicos e urgentes. Várias gerações de brasileiros sofreram o impacto e a sedução desses meninos que moram num trapiche abandonado no areal do cais de Salvador, vivendo à margem das convenções sociais. Verdadeiro romance de formação, o livro nos torna íntimos de suas pequenas criaturas, cada uma delas com suas carências e suas ambições: do líder Pedro Bala ao religioso Pirulito, do ressentido e cruel Sem-Pernas ao aprendiz de cafetão Gato, do sensato Professor ao rústico sertanejo Volta Seca. Com a força envolvente da sua prosa, Jorge Amado nos aproxima desses garotos e nos contagia com seu intenso desejo de liberdade.",
+	"edicao" : "1", 
+	"tombo" : "w1234",
+	"ano" : "2005",
+	"status" : "Disponível",
+	"categoria" : "Vestibular"
+}

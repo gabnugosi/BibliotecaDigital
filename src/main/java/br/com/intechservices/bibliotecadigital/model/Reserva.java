@@ -32,9 +32,6 @@ public class Reserva {
 		@Column(name = "id_obra")
 		private int idObra;
 		
-		
-		
-		
 		public Reserva() {}
 
 		public Reserva(int id, Date dtHoraReserva, int prazoReserva, String situacaoReserva, int idObra, int idUser) {

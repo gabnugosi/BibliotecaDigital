@@ -1,7 +1,7 @@
 USE MASTER;
 GO
 DROP DATABASE BDIGITAL_201902;
-
+go
 
 CREATE DATABASE BDIGITAL_201902;
 GO
@@ -30,15 +30,6 @@ CREATE TABLE editora(
 );
 GO
 
---tabela de tombos com localização e livro (colunas)
-CREATE TABLE tombos(
-	id_tombos 		int 	        NOT NULL	IDENTITY(1,1) 	PRIMARY KEY,
-	id_obra			int 	        NOT NULL, 
-	localizacao 	VARCHAR(10),
-	CONSTRAINT 	id_obra	 FOREIGN KEY	(id_obra)	REFERENCES obra	(id_obra)
-);
-GO
-
 CREATE TABLE obra(
 	id_obra					INT				NOT NULL	IDENTITY(1,1)	PRIMARY KEY,
 	id_autor				INT				NOT NULL,
@@ -56,6 +47,15 @@ CREATE TABLE obra(
 	idioma					VARCHAR(20)
 	CONSTRAINT id_autor_autor			FOREIGN KEY (id_autor)				REFERENCES autor				(id_autor),
 	CONSTRAINT id_editora_editora		FOREIGN KEY	(id_editora)			REFERENCES editora				(id_editora)	
+);
+GO
+
+--tabela de tombos com localização e livro (colunas)
+CREATE TABLE tombos(
+	id_tombos 		int 	        NOT NULL	IDENTITY(1,1) 	PRIMARY KEY,
+	id_obra			int 	        NOT NULL, 
+	localizacao 	VARCHAR(10),
+	CONSTRAINT 	id_obra	 FOREIGN KEY	(id_obra)	REFERENCES obra	(id_obra)
 );
 GO
 
@@ -100,6 +100,7 @@ CREATE TABLE item_emprestimo(
 	data_emp					DATE			NOT NULL,
 	dt_hora_emprest				SMALLDATETIME	NOT	NULL,
 	dt_hora_devolucao			SMALLDATETIME	NOT	NULL,
+	id_usu						int				not null,
 	CONSTRAINT usuario_id_item_emprestimo	FOREIGN KEY (id_usu)	REFERENCES usuario (id_usu)
 );
 GO
@@ -155,31 +156,6 @@ CREATE TABLE pendencia(
 GO
 
 
-CREATE TABLE item_emprestimo(
-	iditem_emprestimo		int				NOT NULL	IDENTITY(1,1) PRIMARY KEY,
-	qtd_item				int				NOT NULL,
-	dt_emp					SMALLDATETIME	NOT NULL,
-	dt_hora_emprest			SMALLDATETIME	NOT NULL,
-	dt_hora_devolucao		SMALLDATETIME	NOT NULL
-);
-GO
-
-CREATE TABLE emprestimo(
-	id_emp						int				NOT NULL	 IDENTITY(1,1) PRIMARY KEY,
-	id_usu						int				NOT NULL,
-	iditem_emprestimo			int				NOT NULL,
-	dt_reserva					smalldatetime	NOT NULL,
-	dt_hora_devolucao			smalldatetime	NOT NULL,
-	dt_hora_emp					smalldatetime	NOT NULL,
-	dt_emprestimo_concluido		smalldatetime	NOT NULL,
-	CONSTRAINT	id_usuario_emprestimo 			FOREIGN KEY (id_usu) REFERENCES usuario (id_usu),
-	CONSTRAINT	iditem_emprestimo_emprestimo 	FOREIGN KEY (iditem_emprestimo) REFERENCES item_emprestimo (iditem_emprestimo),
-);
-
-
-
-
-USE BDIGITAL_201902;
 
 alter table obra
 alter column descricao_obra varchar(1800) null;
@@ -221,6 +197,9 @@ drop column vb_imagem;
 alter table imagem_obra
 add id_obra int;
 
+alter table obra 
+drop column qtd_obra;
+
 --incluir constraint
 alter table pendencia
 alter column valor_multa float not null;
@@ -232,7 +211,7 @@ alter table autor
 alter column nm_autor varchar(60);
 
 CREATE TABLE obra_autor(
-	id int primary key,  
+	id int primary key not null  identity(1,1),
 	id_autor int not null, 
 	id_obra int not null,
 	constraint id_obra_obraautor FOREIGN KEY (id_obra) REFERENCES obra (id_obra),
@@ -244,4 +223,20 @@ DROP CONSTRAINT id_autor_autor;
 
 alter table obra
 drop column id_autor;
+
+alter table reserva
+drop constraint id_obra_reserva;
+
+alter table reserva
+drop column id_obra;
+
+create table reserva_obra(
+	id int primary key  not null  identity(1,1),
+	id_reserva int not null, 
+	id_obra int not null,
+	constraint id_reserva_obrareserva FOREIGN KEY (id_reserva) REFERENCES reserva (id_reserva),
+	constraint  id_reserva_obraobra FOREIGN KEY (id_obra) REFERENCES obra (id_obra)
+);
+
+
 

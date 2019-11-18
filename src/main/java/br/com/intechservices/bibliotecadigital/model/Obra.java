@@ -56,9 +56,6 @@ public class Obra {
 	@Column(name = "categoria")
 	private String categoria;
 
-	@Column(name = "qtd_obra")
-	private int qtde;
-
 	public Obra() {
 	}
 
@@ -141,13 +138,4 @@ public class Obra {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-
-	public int getQtde() {
-		return qtde;
-	}
-
-	public void setQtde(int qtde) {
-		this.qtde = qtde;
-	}
-
 }
