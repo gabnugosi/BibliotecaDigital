@@ -1,11 +1,18 @@
 package br.com.intechservices.bibliotecadigital.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,21 +35,17 @@ public class Reserva {
 		
 		@Column(name = "id_usu")
 		private int idUser;
+
+		@ManyToMany
+		@JoinTable(name = "reserva_obra", joinColumns = { @JoinColumn(name = "id_reserva") }, inverseJoinColumns = {
+				@JoinColumn(name = "id_obra") })
+		private List<Obra> obras;
 		
-		@Column(name = "id_obra")
-		private int idObra;
+		@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+		@JoinColumn(name = "id_usu", nullable=false, insertable=false, updatable=false)
+		private Usuario reserva;
 		
 		public Reserva() {}
-
-		public Reserva(int id, Date dtHoraReserva, int prazoReserva, String situacaoReserva, int idObra, int idUser) {
-			super();
-			this.id = id;
-			this.dtHoraReserva = dtHoraReserva;
-			this.prazoReserva = prazoReserva;
-			this.situacaoReserva = situacaoReserva;
-			this.idObra = idObra;
-			this.idUser = idUser;
-		}
 		
 		public int getId() {
 			return id;
@@ -67,12 +70,6 @@ public class Reserva {
 		}
 		public void setSituacaoReserva(String situacaoReserva) {
 			this.situacaoReserva = situacaoReserva;
-		}
-		public int getIdObra() {
-			return idObra;
-		}
-		public void setIdObra(int idObra) {
-			this.idObra = idObra;
 		}
 		public int getIdUser() {
 			return idUser;

@@ -1,11 +1,14 @@
 package br.com.intechservices.bibliotecadigital.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +21,7 @@ public class Usuario {
 	private int idUser;
 	
 	@Column(name = "nm_usu")
-	private String nomeUsuario;
+	private String nome;
 	
 	@Column(name = "email_usu")
 	private String emailUsuario;
@@ -32,6 +35,9 @@ public class Usuario {
 	@ManyToOne
 	@JoinColumn(name = "id_endereco")
 	private Endereco idEndereco;
+	
+	@OneToMany(mappedBy = "reserva")
+	private List<Reserva> reservas;
 		
 	public int getIdUser() {
 		return idUser;
@@ -39,11 +45,11 @@ public class Usuario {
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public String getNome() {
+		return nome;
 	}
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setNome(String nomeUsuario) {
+		this.nome = nomeUsuario;
 	}
 	public String getEmailUsuario() {
 		return emailUsuario;

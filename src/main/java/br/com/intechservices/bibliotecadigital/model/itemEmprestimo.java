@@ -19,7 +19,7 @@ public class itemEmprestimo {
 	@Column(name = "qtd_item")	
 	private int qtdItem;
 	
-	@Column(name = "dt_emp")	
+	@Column(name = "data_emp")	
 	private Date dtEmp;
 	
 	@Column(name = "dt_hora_emprest")	

@@ -239,4 +239,10 @@ create table reserva_obra(
 );
 
 
+alter table emprestimo 
+drop column emprestimo_concluido; 
+
+alter table emprestimo 
+add dt_emprestimo_concluido smalldatetime not null; 
+
 

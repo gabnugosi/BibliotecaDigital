@@ -28,7 +28,7 @@ public class Emprestimo {
 	@Column(name = "dt_hora_devolucao")
 	private Date dtHoraDevolucao;
 	
-	@Column(name = "dt_hora_emp")
+	@Column(name = "hora_emp")
 	private Date dtHoraEmp;
 	
 	@Column(name = "dt_emprestimo_concluido")

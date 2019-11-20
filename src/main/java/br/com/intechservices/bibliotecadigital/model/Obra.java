@@ -34,6 +34,9 @@ public class Obra {
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "id_editora", nullable=false, insertable=false, updatable=false)
 	private Editora obra;
+	
+	@ManyToMany(mappedBy = "obras")
+	private List<Reserva> reservas;
 
 	@Column(name = "nm_obra")
 	private String nome;

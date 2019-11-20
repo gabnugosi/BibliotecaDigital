@@ -1,11 +1,8 @@
 package br.com.intechservices.bibliotecadigital.controller;
 
-import java.util.Optional;
-
-import javax.validation.Valid;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,62 +13,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.intechservices.bibliotecadigital.dao.UsuarioDAO;
 import br.com.intechservices.bibliotecadigital.model.Usuario;
-//import br.com.intechservices.bibliotecadigital.repository.UsuarioRepository;
+
 
 @RestController
-@RequestMapping("usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
-	/*
 	@Autowired
-	private UsuarioRepository usuarioRepo;
-	
-	 //@RequestMapping(method = RequestMethod.GET)
+	private UsuarioDAO dao;
+
+	@PostMapping
+	public void insert(@RequestBody Usuario usuario) {
+		dao.save(usuario);
+	}
 	@GetMapping
-	 public ResponseEntity<Usuario> GetById(@PathVariable(value = "id") long id)
-	    {
-	        Optional<Usuario> usuario = usuarioRepo.findById(id);
-	        if(usuario.isPresent())
-	            return new ResponseEntity<Usuario>(usuario.get(), HttpStatus.OK);
-	        else
-	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
-		
-		//@RequestMapping(method =  RequestMethod.POST)
-		@PostMapping
-	    public Usuario Post(@Valid @RequestBody Usuario usuario)
-	    {
-	        return usuarioRepo.save(usuario);
-	    }
-	 
-		
-		//@RequestMapping(method =  RequestMethod.PUT)
-	    @PutMapping
-		public ResponseEntity<Usuario> Put(@PathVariable(value = "id") long id, @Valid @RequestBody Usuario newUsuario)
-	    {
-	        Optional<Usuario> oldUsuario = usuarioRepo.findById(id);
-	        if(oldUsuario.isPresent()){
-	            Usuario usuario = oldUsuario.get();
-	            usuario.setNomeUsuario(newUsuario.getNomeUsuario());
-	            usuarioRepo.save(usuario);
-	            return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
-	        }
-	        else
-	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
-	    
-	    
-	    //@RequestMapping(method = RequestMethod.DELETE)
-	    @DeleteMapping
-	    public ResponseEntity<Object> Delete(@PathVariable(value = "id") long id)
-	    {
-	        Optional<Usuario> usuario = usuarioRepo.findById(id);
-	        if(usuario.isPresent()){
-	            usuarioRepo.delete(usuario.get());
-	            return new ResponseEntity<>(HttpStatus.OK);
-	        }
-	        else
-	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
-	 */
+	public List<Usuario> findAll(){
+		return dao.findAll();
+	}
+	@GetMapping(path = {"/{id}"}) 
+	public ResponseEntity<Usuario> findById(@PathVariable Integer id){
+		return dao.findById(id)
+				.map(record -> ResponseEntity.ok().body(record))
+				.orElse(ResponseEntity.notFound().build());
+	}
+	@PutMapping(value="/{id}")
+	public ResponseEntity<Usuario> update(@PathVariable("id") Integer id, @RequestBody Usuario usuario){
+		return dao.findById(id)
+				.map(record -> {
+					record.setNome(usuario.getNome());
+					Usuario updated = dao.save(record);
+					return ResponseEntity.ok().body(updated);
+				}).orElse(ResponseEntity.notFound().build());
+	}
+	@DeleteMapping(path= {"/{id}"})
+	public ResponseEntity<?> delete(@PathVariable("id") Integer id){
+		return dao.findById(id)
+				.map(record -> {
+					dao.deleteById(id);
+					return ResponseEntity.ok().build();
+				}).orElse(ResponseEntity.notFound().build());
+				}
 }
