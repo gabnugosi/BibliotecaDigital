@@ -245,4 +245,4 @@ drop column emprestimo_concluido;
 alter table emprestimo 
 add dt_emprestimo_concluido smalldatetime not null; 
 
-
+sp_help reserva
