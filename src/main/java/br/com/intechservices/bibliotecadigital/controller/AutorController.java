@@ -48,6 +48,8 @@ public class AutorController {
 		return dao.findById(id)
 				.map(record -> {
 					record.setNome(autor.getNome());
+					record.setFirstname(autor.getFirstname());
+					record.setLastname(record.getLastname());
 					Autor updated = dao.save(record);
 					return ResponseEntity.ok().body(updated);
 				}).orElse(ResponseEntity.notFound().build());

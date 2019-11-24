@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "endereco")
 public class Endereco {
-	
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id_endereco")
@@ -36,9 +36,14 @@ public class Endereco {
 	@Column(name = "estado")
 	private String estado;
 
-	
-	public Endereco() {}
-	
+	public Endereco() {
+	}
+
+	public Endereco(int idEndereco) {
+		super();
+		this.idEndereco = idEndereco;
+	}
+
 	public Endereco(int idEndereco, int cep, String logradouro, String nomeLogradouro, String numeroLogradouro,
 			String cidade, String bairro, String estado) {
 		super();

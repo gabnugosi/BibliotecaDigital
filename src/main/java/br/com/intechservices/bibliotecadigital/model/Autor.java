@@ -7,16 +7,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "autor")
 public class Autor {
-	
-	
 	
 	public Autor() {}
 
@@ -31,12 +27,12 @@ public class Autor {
 	@ManyToMany(mappedBy = "autores")
 	private List<Obra> obras;
 	
-	public Autor(int id, String nome) {
-		super();
-		this.id = id;
-		this.nome = nome;
-	}
-
+	@Column(name = 	"FIRSTNAME")
+	private String firstname;
+	
+	@Column(name = 	"LASTNAME")
+	private String lastname;
+	
 	public int getId() {
 		return id;
 	}
@@ -51,6 +47,30 @@ public class Autor {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<Obra> getObras() {
+		return obras;
+	}
+
+	public void setObras(List<Obra> obras) {
+		this.obras = obras;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 }

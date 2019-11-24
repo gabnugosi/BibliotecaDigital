@@ -25,13 +25,7 @@ public class Editora {
 	private List<Obra> obras;
 
 	public Editora() {
-		super();
-	}
 
-	public Editora(int id, String nome) {
-		super();
-		this.id = id;
-		this.nome = nome;
 	}
 
 	public int getId() {

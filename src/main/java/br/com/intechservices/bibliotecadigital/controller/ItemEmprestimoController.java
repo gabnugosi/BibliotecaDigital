@@ -13,40 +13,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.intechservices.bibliotecadigital.dao.UsuarioDAO;
-import br.com.intechservices.bibliotecadigital.model.Usuario;
-
+import br.com.intechservices.bibliotecadigital.dao.ItemEmprestimoDAO;
+import br.com.intechservices.bibliotecadigital.model.ItemEmprestimo;
 
 @RestController
-@RequestMapping("/usuarios")
-public class UsuarioController {
+@RequestMapping("/itememprestimos")
+public class ItemEmprestimoController {
 	@Autowired
-	private UsuarioDAO dao;
+	private ItemEmprestimoDAO dao;
 
 	@PostMapping
-	public void insert(@RequestBody Usuario usuario) {
-		dao.save(usuario);
+	public void insert(@RequestBody ItemEmprestimo itemEmprestimo) {
+		dao.save(itemEmprestimo);
 	}
 	@GetMapping
-	public List<Usuario> findAll(){
+	public List<ItemEmprestimo> findAll(){
 		return dao.findAll();
 	}
 	@GetMapping(path = {"/{id}"}) 
-	public ResponseEntity<Usuario> findById(@PathVariable Integer id){
+	public ResponseEntity<ItemEmprestimo> findById(@PathVariable Integer id){
 		return dao.findById(id)
 				.map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	@PutMapping(value="/{id}")
-	public ResponseEntity<Usuario> update(@PathVariable("id") Integer id, @RequestBody Usuario usuario){
+	public ResponseEntity<ItemEmprestimo> update(@PathVariable("id") Integer id, @RequestBody ItemEmprestimo itemEmprestimo){
 		return dao.findById(id)
 				.map(record -> {
-					record.setNome(usuario.getNome());
-					record.setCelUsuario(usuario.getCelUsuario());
-					record.setEmailUsuario(usuario.getEmailUsuario());
-					record.setIdEndereco(usuario.getIdEndereco());
-					record.setRg(usuario.getRg());					
-					Usuario updated = dao.save(record);
+					record.setIdItemEmprestimo(record.getIdItemEmprestimo());
+					record.setDtEmp(itemEmprestimo.getDtEmp());
+					record.setDtHoraDevolucao(itemEmprestimo.getDtHoraDevolucao());
+					record.setQtdItem(itemEmprestimo.getIdItemEmprestimo());
+					record.setDtHoraEmprest(itemEmprestimo.getDtHoraEmprest());
+					ItemEmprestimo updated = dao.save(record);
 					return ResponseEntity.ok().body(updated);
 				}).orElse(ResponseEntity.notFound().build());
 	}

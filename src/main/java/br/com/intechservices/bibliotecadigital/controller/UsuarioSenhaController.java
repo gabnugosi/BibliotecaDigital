@@ -13,43 +13,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.intechservices.bibliotecadigital.dao.ObraDAO;
-import br.com.intechservices.bibliotecadigital.model.Obra;
+import br.com.intechservices.bibliotecadigital.dao.UsuarioSenhaDAO;
+import br.com.intechservices.bibliotecadigital.model.UsuarioSenha;
 
 @RestController
-@RequestMapping("/obras")
-public class ObraController {
+@RequestMapping("/usuariosenhas")
+public class UsuarioSenhaController {
 	@Autowired
-	private ObraDAO dao;
+	private UsuarioSenhaDAO dao;
 
 	@PostMapping
-	public void insert(@RequestBody Obra obra) {
-		dao.save(obra);
+	public void insert(@RequestBody UsuarioSenha usuarioSenha) {
+		dao.save(usuarioSenha);
 	}
 
 	@GetMapping
-	public List<Obra> findAll() {
+	public List<UsuarioSenha> findAll() {
 		return dao.findAll();
 	}
 
 	@GetMapping(path = { "/{id}" })
-	public ResponseEntity<Obra> findById(@PathVariable Integer id) {
+	public ResponseEntity<UsuarioSenha> findById(@PathVariable Integer id) {
 		return dao.findById(id).map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Obra> update(@PathVariable("id") Integer id, @RequestBody Obra obra) {
-		return dao.findById(id).map(record -> {
-			record.setNome(obra.getNome());
-			record.setDescricao(obra.getDescricao());
-			record.setIdEditora(obra.getIdEditora());
-			record.setAno(obra.getAno());
-			record.setEdicao(obra.getEdicao());
-			record.setTombo(obra.getTombo());
-			record.setStatus(obra.getStatus());
-			record.setCategoria(obra.getCategoria());
-			Obra updated = dao.save(record);
+	public ResponseEntity<UsuarioSenha> update(@PathVariable("id") Integer id, @RequestBody UsuarioSenha usuarioSenha) {
+		return dao.findById(id).map(record -> {			
+			record.setSenha(usuarioSenha.getSenha());
+			UsuarioSenha updated = dao.save(record);
 			return ResponseEntity.ok().body(updated);
 		}).orElse(ResponseEntity.notFound().build());
 	}

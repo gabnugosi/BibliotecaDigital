@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +35,12 @@ public class Obra {
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "id_editora", nullable=false, insertable=false, updatable=false)
 	private Editora obra;
+
+	@OneToMany(mappedBy = "itemEmprestimoObra")
+	private List<ItemEmprestimo> itemEmprestimoObra;
+	
+	@OneToMany(mappedBy = "imagemObra")
+	private List<ImagemObra> imagemObras;
 	
 	@ManyToMany(mappedBy = "obras")
 	private List<Reserva> reservas;
@@ -140,5 +147,37 @@ public class Obra {
 
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+	
+	public Editora getObra() {
+		return obra;
+	}
+
+	public void setObra(Editora obra) {
+		this.obra = obra;
+	}
+
+	public List<ItemEmprestimo> getItemEmprestimoObra() {
+		return itemEmprestimoObra;
+	}
+
+	public void setItemEmprestimoObra(List<ItemEmprestimo> itemEmprestimoObra) {
+		this.itemEmprestimoObra = itemEmprestimoObra;
+	}
+
+	public List<ImagemObra> getImagemObras() {
+		return imagemObras;
+	}
+
+	public void setImagemObras(List<ImagemObra> imagemObras) {
+		this.imagemObras = imagemObras;
+	}
+
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
 	}
 }

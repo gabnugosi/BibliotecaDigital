@@ -33,8 +33,8 @@ public class Reserva {
 		@Column(name = "situacao_reserva")
 		private String situacaoReserva;		
 		
-		@Column(name = "id_usu")
-		private int idUser;
+		/*@Column(name = "id_usu")
+		private int idUser;*/
 
 		@ManyToMany
 		@JoinTable(name = "reserva_obra", joinColumns = { @JoinColumn(name = "id_reserva") }, inverseJoinColumns = {
@@ -71,12 +71,12 @@ public class Reserva {
 		public void setSituacaoReserva(String situacaoReserva) {
 			this.situacaoReserva = situacaoReserva;
 		}
-		public int getIdUser() {
+		/*public int getIdUser() {
 			return idUser;
 		}
 		public void setIdUser(int idUser) {
 			this.idUser = idUser;
-		}
+		}*/
 		
 		
 }
