@@ -20,9 +20,6 @@ public class UsuarioInadimplente {
 	@Column(name = "idusuario_inadimplente")
 	private int id;
 
-	@Column(name = "id_usu")
-	private int idUser;
-
 	@Column(name = "valor_multa")
 	private double valorMulta;
 
@@ -44,14 +41,6 @@ public class UsuarioInadimplente {
 		this.id = id;
 	}
 
-	public int getIdUser() {
-		return idUser;
-	}
-
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
-
 	public double getValorMulta() {
 		return valorMulta;
 	}
@@ -60,7 +49,7 @@ public class UsuarioInadimplente {
 		this.valorMulta = valorMulta;
 	}
 
-	public boolean isDivida() {
+	public boolean getDivida() {
 		return divida;
 	}
 

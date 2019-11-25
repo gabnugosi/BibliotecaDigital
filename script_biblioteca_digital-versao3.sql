@@ -238,19 +238,54 @@ create table reserva_obra(
 	constraint  id_reserva_obraobra FOREIGN KEY (id_obra) REFERENCES obra (id_obra)
 );
 
-
+--- executar essa semana na base da etec
 alter table emprestimo 
 drop column emprestimo_concluido; 
 
 alter table emprestimo 
 add dt_emprestimo_concluido smalldatetime not null; 
----
-alter table reserva
-add CONSTRAINT id_usuario_reserva FOREIGN KEY (id_usu) REFERENCES usuario (id_usu)
-
-alter table reserva
-add id_usu INT NOT NULL
 
 
 
-sp_help item_emprestimo;
+
+alter table item_emprestimo 
+drop constraint usuario_id_item_emprestimo;
+
+alter table item_emprestimo 
+drop column id_usu;
+
+alter table item_emprestimo 
+add id_obra int not null;
+
+alter table item_emprestimo 
+add constraint obra_id_item_emprestimo FOREIGN KEY (id_obra) REFERENCES obra (id_obra);
+
+alter table item_emprestimo 
+add id_usuario int not null;
+
+alter table item_emprestimo 
+add constraint usuario_id_item_emprestimo FOREIGN KEY (id_usuario) REFERENCES usuario (id_usu);
+
+alter table usuario
+alter column registro_identificador numeric(19,0) not null
+
+
+alter table pendencia 
+drop constraint id_usuario_pendencia;
+
+alter table pendencia 
+drop column id_usu;
+
+
+alter table pendencia 
+add idusuario_inadimplente int not null;
+
+alter table pendencia 
+add constraint pendencia_id_inadimplente FOREIGN KEY (idusuario_inadimplente) REFERENCES usuario_inadimplente (idusuario_inadimplente);
+
+alter table pendencia
+alter column registro_identificador numeric(19,0) not null
+
+sp_help moderador
+
+
