@@ -26,36 +26,37 @@ public class EmprestimoController {
 	public void insert(@RequestBody Emprestimo emprestimo) {
 		dao.save(emprestimo);
 	}
+
 	@GetMapping
-	public List<Emprestimo> findAll(){
+	public List<Emprestimo> findAll() {
 		return dao.findAll();
 	}
-	@GetMapping(path = {"/{id}"}) 
-	public ResponseEntity<Emprestimo> findById(@PathVariable Integer id){
-		return dao.findById(id)
-				.map(record -> ResponseEntity.ok().body(record))
+
+	@GetMapping(path = { "/{id}" })
+	public ResponseEntity<Emprestimo> findById(@PathVariable Integer id) {
+		return dao.findById(id).map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	@PutMapping(value="/{id}")
-	public ResponseEntity<Emprestimo> update(@PathVariable("id") Integer id, @RequestBody Emprestimo emprestimo){
-		return dao.findById(id)
-				.map(record -> {
-					record.setDtEmprestimoConcluido(emprestimo.getDtEmprestimoConcluido());
-					record.setDtHoraDevolucao(emprestimo.getDtHoraDevolucao());
-					record.setDtHoraEmp(emprestimo.getDtHoraEmp());
-					record.setDtReserva(emprestimo.getDtReserva());
-					record.setIdUser(emprestimo.getIdUser());
-					record.setIdItemEmprestimo(emprestimo.getIdItemEmprestimo());
-					Emprestimo updated = dao.save(record);
-					return ResponseEntity.ok().body(updated);
-				}).orElse(ResponseEntity.notFound().build());
+
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Emprestimo> update(@PathVariable("id") Integer id, @RequestBody Emprestimo emprestimo) {
+		return dao.findById(id).map(record -> {
+			record.setDtEmprestimoConcluido(emprestimo.getDtEmprestimoConcluido());
+			record.setDtHoraDevolucao(emprestimo.getDtHoraDevolucao());
+			record.setDtHoraEmp(emprestimo.getDtHoraEmp());
+			record.setDtReserva(emprestimo.getDtReserva());
+			record.setIdUser(emprestimo.getIdUser());
+			record.setIdItemEmprestimo(emprestimo.getIdItemEmprestimo());
+			Emprestimo updated = dao.save(record);
+			return ResponseEntity.ok().body(updated);
+		}).orElse(ResponseEntity.notFound().build());
 	}
-	@DeleteMapping(path= {"/{id}"})
-	public ResponseEntity<?> delete(@PathVariable("id") Integer id){
-		return dao.findById(id)
-				.map(record -> {
-					dao.deleteById(id);
-					return ResponseEntity.ok().build();
-				}).orElse(ResponseEntity.notFound().build());
-				}
+
+	@DeleteMapping(path = { "/{id}" })
+	public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+		return dao.findById(id).map(record -> {
+			dao.deleteById(id);
+			return ResponseEntity.ok().build();
+		}).orElse(ResponseEntity.notFound().build());
+	}
 }

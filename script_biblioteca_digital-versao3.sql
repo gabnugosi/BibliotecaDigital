@@ -286,6 +286,6 @@ add constraint pendencia_id_inadimplente FOREIGN KEY (idusuario_inadimplente) RE
 alter table pendencia
 alter column registro_identificador numeric(19,0) not null
 
-sp_help moderador
+sp_help pendencia
 
 

@@ -40,7 +40,7 @@ public class UsuarioSenhaController {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<UsuarioSenha> update(@PathVariable("id") Integer id, @RequestBody UsuarioSenha usuarioSenha) {
-		return dao.findById(id).map(record -> {			
+		return dao.findById(id).map(record -> {
 			record.setSenha(usuarioSenha.getSenha());
 			UsuarioSenha updated = dao.save(record);
 			return ResponseEntity.ok().body(updated);

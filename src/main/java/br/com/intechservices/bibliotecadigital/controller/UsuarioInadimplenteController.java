@@ -39,7 +39,8 @@ public class UsuarioInadimplenteController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<UsuarioInadimplente> update(@PathVariable("id") Integer id, @RequestBody UsuarioInadimplente usuarioInadimplente) {
+	public ResponseEntity<UsuarioInadimplente> update(@PathVariable("id") Integer id,
+			@RequestBody UsuarioInadimplente usuarioInadimplente) {
 		return dao.findById(id).map(record -> {
 			record.setDataPgtoMulta(usuarioInadimplente.getDataPgtoMulta());
 			record.setDivida(usuarioInadimplente.getDivida());

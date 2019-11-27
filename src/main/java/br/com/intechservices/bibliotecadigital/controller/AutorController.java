@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.intechservices.bibliotecadigital.dao.AutorDAO;
 import br.com.intechservices.bibliotecadigital.model.Autor;
 
-
 @RestController
 @RequestMapping("/autores")
 public class AutorController {
@@ -27,36 +26,34 @@ public class AutorController {
 	public void insert(@RequestBody Autor autor) {
 		dao.save(autor);
 	}
+
 	@GetMapping
-	public List<Autor> findAll(){
+	public List<Autor> findAll() {
 		return dao.findAll();
 	}
-	@GetMapping(path = {"/{id}"}) 
-	public ResponseEntity<Autor> findById(@PathVariable Integer id){
-		return dao.findById(id)
-				.map(record -> ResponseEntity.ok().body(record))
+
+	@GetMapping(path = { "/{id}" })
+	public ResponseEntity<Autor> findById(@PathVariable Integer id) {
+		return dao.findById(id).map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	@PutMapping(value="/{id}")
-	public ResponseEntity<Autor> update(@PathVariable("id") Integer id, @RequestBody Autor autor){
-		return dao.findById(id)
-				.map(record -> {
-					record.setNome(autor.getNome());
-					record.setFirstname(autor.getFirstname());
-					record.setLastname(record.getLastname());
-					Autor updated = dao.save(record);
-					return ResponseEntity.ok().body(updated);
-				}).orElse(ResponseEntity.notFound().build());
-	}
-	@DeleteMapping(path= {"/{id}"})
-	public ResponseEntity<?> delete(@PathVariable("id") Integer id){
-		return dao.findById(id)
-				.map(record -> {
-					dao.deleteById(id);
-					return ResponseEntity.ok().build();
-				}).orElse(ResponseEntity.notFound().build());
-				}
-}
-	
-	 	 
 
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Autor> update(@PathVariable("id") Integer id, @RequestBody Autor autor) {
+		return dao.findById(id).map(record -> {
+			record.setNome(autor.getNome());
+			record.setFirstname(autor.getFirstname());
+			record.setLastname(record.getLastname());
+			Autor updated = dao.save(record);
+			return ResponseEntity.ok().body(updated);
+		}).orElse(ResponseEntity.notFound().build());
+	}
+
+	@DeleteMapping(path = { "/{id}" })
+	public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+		return dao.findById(id).map(record -> {
+			dao.deleteById(id);
+			return ResponseEntity.ok().build();
+		}).orElse(ResponseEntity.notFound().build());
+	}
+}
